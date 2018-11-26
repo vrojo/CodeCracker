@@ -2,15 +2,15 @@ package codeCracker;
 
 import java.util.*;
 
-public class Encrypter {
+class Encrypter {
     Map<Character, Character> transformer;
 
-    public Encrypter(String alphabet) {
-        AlphabetValidator.validates(alphabet);
-        this.transformer = AlphabetMapGenerator.generate(alphabet);
+    Encrypter(String alphabet) {
+        new AlphabetValidator().validates(alphabet);
+        this.transformer = new AlphabetMapGenerator().generate(alphabet);
     }
 
-    public String crypt(String stringToCrypt) {
+    String crypt(String stringToCrypt) {
         StringBuilder cryptedString = new StringBuilder();
         for (char letter : stringToCrypt.toCharArray()) {
             if (transformer.containsKey(letter)) {
@@ -22,7 +22,7 @@ public class Encrypter {
         return cryptedString.toString();
     }
 
-    public String decrypt(String cryptedString) {
+    String decrypt(String cryptedString) {
         StringBuilder decryptedString = new StringBuilder();
         for (char letter : cryptedString.toCharArray()) {
             Character key = getKey(letter);
@@ -35,7 +35,7 @@ public class Encrypter {
         return decryptedString.toString();
     }
 
-    public Character getKey(Character value) {
+    private Character getKey(Character value) {
         for (Character key : transformer.keySet()) {
             if (value.equals(transformer.get(key))) {
                 return key;

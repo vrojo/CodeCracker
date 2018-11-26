@@ -3,15 +3,16 @@ package codeCracker;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlphabetMapGenerator {
-    public static Map<Character, Character> generate(String encryptedAlphabet) {
-        HashMap<Character, Character> map = new HashMap<>();
-        int indexOfLetter = 0;
-        for (char letter : "abcdefghijklmnopqrstuvwxyz".toCharArray()) {
-            if (map.containsValue(encryptedAlphabet.charAt(indexOfLetter)))
+class AlphabetMapGenerator {
+
+    Map<Character, Character> generate(String encryptedAlphabet) {
+        Map<Character, Character> map = new HashMap<>();
+        char[] charArray = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            char letter = charArray[i];
+            if (map.containsValue(encryptedAlphabet.charAt(i)))
                 throw new IllegalArgumentException();
-            map.put(letter, encryptedAlphabet.charAt(indexOfLetter));
-            indexOfLetter++;
+            map.put(letter, encryptedAlphabet.charAt(i));
         }
         return map;
     }
